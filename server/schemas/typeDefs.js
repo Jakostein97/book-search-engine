@@ -4,18 +4,26 @@ const typeDefs = `
     username: String!
     email: String!
     password: String!
-    bookCount: Number
+    bookCount: Int
     savedBooks: [Book]
   }
 
   type Book {
-  _id: ID
+  bookId: ID
+  title: String!
   description: String!
-  bookId: String!
-  authors: [String!]
+  authors: [String]
   image: String
   link: String
- description: String!
+  }
+
+  input BookInput {
+   bookId: ID
+  title: String!
+  description: String!
+  authors: [String]
+  image: String
+  link: String
   }
 
   type Auth {
@@ -24,14 +32,14 @@ const typeDefs = `
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    logIn(email: String!, password: String!): Auth
+    saveBook(bookData: BookInput!): User
+    removeBook(bookId: ID!): User
   }
 `;
 
